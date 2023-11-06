@@ -40,7 +40,7 @@ THE SOFTWARE IS PROVIDED AS IS, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED
 ██║  ██║╚██████╔╝██████╔╝██║   ██║
 ╚═╝  ╚═╝ ╚═════╝ ╚═════╝ ╚═╝   ╚═╝
 ... by LOGHOUSE ADMIN
-... v.1.2.1[MIT]
+... v.1.2.2[MIT]
 
 "  >> /tmp-audit/auditlog-`hostname`-$(date +%Y%m%d).txt
 
