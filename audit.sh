@@ -364,6 +364,26 @@ echo  "[REPORT NGINX]" >> /tmp-audit/auditlog-`hostname`-$(date +%Y%m%d).txt
 nginx -T  >> /tmp-audit/auditlog-`hostname`-$(date +%Y%m%d).txt
 printf "\n\n" >> /tmp-audit/auditlog-`hostname`-$(date +%Y%m%d).txt
 
+# Docker
+
+if ! command -v docker &> /dev/null; then
+    echo "Docker is not installed. Install it and try again." > /tmp-audit/auditlog-`hostname`-$(date +%Y%m%d).txt
+    return 1
+fi
+
+if ! systemctl is-active --quiet docker; then
+    echo "Docker is not running. Start it and try again." >> /tmp-audit/auditlog-`hostname`-$(date +%Y%m%d).txt
+    return 1
+fi
+
+local running_containers=$(docker ps)
+if [ -z "$running_containers" ]; then
+    echo "No Docker containers are currently running." >> /tmp-audit/auditlog-`hostname`-$(date +%Y%m%d).txt
+else
+    echo "Running Docker containers:" >> /tmp-audit/auditlog-`hostname`-$(date +%Y%m%d).txt
+    echo "$running_containers" >> /tmp-audit/auditlog-`hostname`-$(date +%Y%m%d).txt
+fi
+
 # bash /tmp-audit/audit/modules/services/php.sh
 
 echo "[PHP VERSION]" >> /tmp-audit/auditlog-`hostname`-$(date +%Y%m%d).txt
